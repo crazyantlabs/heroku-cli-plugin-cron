@@ -19,7 +19,6 @@ You can read more about Cron To Go Scheduler on [Dev Center](https://devcenter.h
 
 <!-- toc -->
 * [Installation](#installation)
-* [Manifest File Overview](#manifest-file-overview)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
@@ -36,7 +35,7 @@ $ npm install -g heroku-cron
 $ heroku COMMAND
 running command...
 $ heroku (--version|-v)
-heroku-cron/1.0.1 darwin-x64 node-v14.16.0
+heroku-cron/1.0.2 darwin-x64 node-v14.16.0
 $ heroku --help [COMMAND]
 USAGE
   $ heroku COMMAND
