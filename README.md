@@ -44,8 +44,6 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-
-<!-- commandsstop -->
 * [`heroku cron`](#heroku-cron)
 * [`heroku cron:jobs`](#heroku-cronjobs)
 * [`heroku cron:jobs:clear`](#heroku-cronjobsclear)
@@ -84,7 +82,7 @@ EXAMPLES
   $ heroku cron --app your-app --json
 ```
 
-_See code: [src/commands/cron/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/index.ts)_
+_See code: [src/commands/cron/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/index.ts)_
 
 ## `heroku cron:jobs`
 
@@ -118,7 +116,7 @@ EXAMPLES
   $ heroku cron:jobs --app=your-app --csv
 ```
 
-_See code: [src/commands/cron/jobs/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/index.ts)_
+_See code: [src/commands/cron/jobs/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/index.ts)_
 
 ## `heroku cron:jobs:clear`
 
@@ -146,7 +144,7 @@ EXAMPLES
   $ heroku cron:jobs:clear --app your-app --confirm your-app
 ```
 
-_See code: [src/commands/cron/jobs/clear.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/clear.ts)_
+_See code: [src/commands/cron/jobs/clear.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/clear.ts)_
 
 ## `heroku cron:jobs:create`
 
@@ -186,7 +184,7 @@ EXAMPLES
   $ heroku cron:jobs:create --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/create.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/create.ts)_
+_See code: [src/commands/cron/jobs/create.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/create.ts)_
 
 ## `heroku cron:jobs:delete JOB`
 
@@ -217,18 +215,18 @@ EXAMPLES
   $ heroku cron:jobs:delete 01234567-89ab-cdef-0123-456789abcdef --app your-app --confirm 01234567-89ab-cdef-0123-456789abcdef
 ```
 
-_See code: [src/commands/cron/jobs/delete.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/delete.ts)_
+_See code: [src/commands/cron/jobs/delete.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/delete.ts)_
 
 ## `heroku cron:jobs:import FILENAME`
 
-import jobs into Cron To Go
+import jobs into Cron To Go using a [manifest file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/examples/manifest.yml)
 
 ```
 USAGE
   $ heroku cron:jobs:import [FILENAME] -a <value> [-r <value>] [--delete] [--confirm <value>]
 
 ARGUMENTS
-  FILENAME  manifest filename
+  FILENAME  manifest file path
 
 FLAGS
   -a, --app=<value>     (required) app to run command against
@@ -237,21 +235,22 @@ FLAGS
   --delete              delete all jobs prior to applying manifest file
 
 DESCRIPTION
-  import jobs into Cron To Go
+  import jobs into Cron To Go using a [manifest
+  file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/examples/manifest.yml)
 
   Read more about this feature at https://devcenter.heroku.com/articles/crontogo
 
 EXAMPLES
-  $ heroku cron:jobs:import -a your-app
+  $ heroku cron:jobs:import manifest.yml -a your-app
 
-  $ heroku cron:jobs:import --app your-app
+  $ heroku cron:jobs:import manifest.yml --app your-app
 
-  $ heroku cron:jobs:import --app your-app --delete
+  $ heroku cron:jobs:import manifest.yml --app your-app --delete
 
-  $ heroku cron:jobs:import --app your-app --delete --confirm your-app
+  $ heroku cron:jobs:import manifest.yml --app your-app --delete --confirm your-app
 ```
 
-_See code: [src/commands/cron/jobs/import.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/import.ts)_
+_See code: [src/commands/cron/jobs/import.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/import.ts)_
 
 ## `heroku cron:jobs:info JOB`
 
@@ -280,7 +279,7 @@ EXAMPLES
   $ heroku cron:jobs:info 01234567-89ab-cdef-0123-456789abcdef --app your-app --json
 ```
 
-_See code: [src/commands/cron/jobs/info.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/info.ts)_
+_See code: [src/commands/cron/jobs/info.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/info.ts)_
 
 ## `heroku cron:jobs:logs JOB`
 
@@ -314,7 +313,7 @@ EXAMPLES
   $ heroku cron:jobs:logs 01234567-89ab-cdef-0123-456789abcdef --app your-app --tail
 ```
 
-_See code: [src/commands/cron/jobs/logs.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/logs.ts)_
+_See code: [src/commands/cron/jobs/logs.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/logs.ts)_
 
 ## `heroku cron:jobs:pause JOB`
 
@@ -342,7 +341,7 @@ EXAMPLES
   $ heroku cron:jobs:pause 01234567-89ab-cdef-0123-456789abcdef --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/pause.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/pause.ts)_
+_See code: [src/commands/cron/jobs/pause.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/pause.ts)_
 
 ## `heroku cron:jobs:resume JOB`
 
@@ -370,7 +369,7 @@ EXAMPLES
   $ heroku cron:jobs:resume 01234567-89ab-cdef-0123-456789abcdef --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/resume.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/resume.ts)_
+_See code: [src/commands/cron/jobs/resume.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/resume.ts)_
 
 ## `heroku cron:jobs:run JOB`
 
@@ -410,7 +409,7 @@ EXAMPLES
   $ heroku cron:jobs:run 01234567-89ab-cdef-0123-456789abcdef --app your-app --tail --confirm 01234567-89ab-cdef-0123-456789abcdef
 ```
 
-_See code: [src/commands/cron/jobs/run.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/run.ts)_
+_See code: [src/commands/cron/jobs/run.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/run.ts)_
 
 ## `heroku cron:jobs:trigger JOB`
 
@@ -491,4 +490,5 @@ EXAMPLES
   $ heroku cron:jobs:create --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/update.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.1/src/commands/cron/jobs/update.ts)_
+_See code: [src/commands/cron/jobs/update.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.2/src/commands/cron/jobs/update.ts)_
+<!-- commandsstop -->
