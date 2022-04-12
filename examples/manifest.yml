@@ -1,0 +1,16 @@
+jobs:
+  - nickname: Every minute job
+    timezone: 'UTC'
+    schedule: '* * * * *'
+    command: 'echo Every Minute Job'
+    dyno: 'Hobby'
+    timeout: 300
+    state: 'enabled'
+
+  - nickname: Daily job
+    timezone: 'UTC'
+    schedule: '* * * * *'
+    command: 'echo Daily Job'
+    dyno: 'Hobby'
+    timeout: 300
+    state: 'enabled'

@@ -1,0 +1,18 @@
+jobs:
+  - nickname: my-job
+    timezone: 'UTC'
+    schedule: '* * * * *'
+    command: 'my command'
+    dyno: 'Hobby'
+    timeout: 30
+    state: 'enabled'
+
+  - nickname: my-job-2
+    timezone: 'UTC'
+    schedule: 'invalid'
+    command: 'my command 2'
+    dyno: 'Hobby'
+    timeout: 30
+    state: 'enabled'
+
+  - invalid-property: 'invalid-property'

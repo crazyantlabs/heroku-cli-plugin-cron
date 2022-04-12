@@ -1,0 +1,16 @@
+jobs:
+  - nickname: my-job
+    timezone: 'UTC'
+    schedule: '* * * * *'
+    command: 'my command'
+    dyno: 'Hobby'
+    timeout: 30
+    state: 'enabled'
+
+  - nickname: created-job-with-very-long-name
+    timezone: 'UTC'
+    schedule: '* * * * *'
+    command: 'my command 2'
+    dyno: 'Hobby'
+    timeout: 30
+    state: 'enabled'
