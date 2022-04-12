@@ -1,16 +1,24 @@
 jobs:
   - nickname: Every minute job
     timezone: 'UTC'
-    schedule: '* * * * *'
-    command: 'echo Every Minute Job'
+    schedule: '*/1 * * * *'
+    command: 'echo "Every Minute Job"'
     dyno: 'Hobby'
     timeout: 300
     state: 'enabled'
 
-  - nickname: Daily job
-    timezone: 'UTC'
-    schedule: '* * * * *'
-    command: 'echo Daily Job'
+  - nickname: Every day (at 09:00)
+    timezone: 'America/New_York'
+    schedule: '0 9 * * *'
+    command: 'echo "Daily Job at 09:00"'
     dyno: 'Hobby'
     timeout: 300
     state: 'enabled'
+
+  - nickname: Every month (on the 1st at 09:00)
+    timezone: 'UTC'
+    schedule: '0 9 1 * *'
+    command: 'echo "Every month (on the 1st at 09:00)"'
+    dyno: 'Hobby'
+    timeout: 300
+    state: 'paused'
