@@ -219,7 +219,7 @@ _See code: [src/commands/cron/jobs/delete.ts](https://github.com/crazyantlabs/he
 
 ## `heroku cron:jobs:import FILENAME`
 
-import jobs into Cron To Go using a [manifest file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/examples/manifest.yml)
+import jobs into Cron To Go using a [manifest file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/main/examples/manifest.yml)
 
 ```
 USAGE
@@ -236,7 +236,7 @@ FLAGS
 
 DESCRIPTION
   import jobs into Cron To Go using a [manifest
-  file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/examples/manifest.yml)
+  file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/main/examples/manifest.yml)
 
   Read more about this feature at https://devcenter.heroku.com/articles/crontogo
 
