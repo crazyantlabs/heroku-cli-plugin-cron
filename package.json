@@ -1,6 +1,6 @@
 {
   "name": "heroku-cron",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Heroku CLI plugin for Cron To Go",
   "author": "Moty Michaely @motymichaely",
   "bin": {
