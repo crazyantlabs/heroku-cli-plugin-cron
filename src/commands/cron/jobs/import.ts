@@ -14,7 +14,7 @@ import ValidationService from '../../../lib/validation-service'
 import * as _ from 'lodash'
 
 export default class JobsImport extends BaseCommand {
-  static description = 'import jobs into Cron To Go using a [manifest file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/examples/manifest.yml)\n\nRead more about this feature at https://devcenter.heroku.com/articles/crontogo'
+  static description = 'import jobs into Cron To Go using a [manifest file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/main/examples/manifest.yml)\n\nRead more about this feature at https://devcenter.heroku.com/articles/crontogo'
 
   static examples = [
     '$ heroku cron:jobs:import manifest.yml -a your-app',
