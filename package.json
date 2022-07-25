@@ -45,7 +45,7 @@
     "@fancy-test/nock": "^0.1.1",
     "@oclif/test": "^2",
     "@types/chai": "^4",
-    "@types/eventsource": "^1.1.8",
+    "@types/eventsource": "^1.1.9",
     "@types/mocha": "^9.1.0",
     "@types/node": "^16.9.4",
     "@types/validator": "^13.7.2",
