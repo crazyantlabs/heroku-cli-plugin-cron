@@ -12,6 +12,8 @@ const filename = path.resolve(__dirname, '../../../manifests/test.import.manifes
 /* eslint-disable-next-line unicorn/prefer-module */
 const noJobsFilename = path.resolve(__dirname, '../../../manifests/test.import.no-jobs.manifest.yaml')
 /* eslint-disable-next-line unicorn/prefer-module */
+const nullJobsFilename = path.resolve(__dirname, '../../../manifests/test.import.null-jobs.manifest.yaml')
+/* eslint-disable-next-line unicorn/prefer-module */
 const invalidJobsFilename = path.resolve(__dirname, '../../../manifests/test.import.invalid-jobs.manifest.yaml')
 
 const configVarsStub = {
@@ -168,6 +170,19 @@ describe('cron:jobs:import', () => {
     expect(ctx.stderr).to.contain(`Importing jobs to ${organizationId} Cron To Go organization... no jobs to import`)
   })
 
+  test
+  .nock('https://api.heroku.com', api => api
+  .get(`/apps/${app}/config-vars`)
+  .reply(200, configVarsStub),
+  )
+  .stderr()
+  .stdout()
+  .command(['cron:jobs:import', nullJobsFilename, '--app', app])
+  .it('shows no jobs to import message', ctx => {
+    expect(ctx.stderr).to.contain(`Reading ${nullJobsFilename} manifest file to import to ${organizationId} Cron To Go organization... done`)
+    expect(ctx.stderr).to.contain(`Importing jobs to ${organizationId} Cron To Go organization... no jobs to import`)
+  })
+
   testWithDeleteFactory()
   .stderr()
   .stdout()
@@ -221,9 +236,9 @@ describe('cron:jobs:import', () => {
   .reply(200, configVarsStub),
   )
   .stderr()
-  .command(['cron:jobs:import', 'no-manufest-file.yml', '--app', app])
+  .command(['cron:jobs:import', 'no-manifest-file.yml', '--app', app])
   .catch(error => expect(error.message).to.match(/no such file or directory/))
   .it('fails to read manifest file', ctx => {
-    expect(ctx.stderr).to.contain(`Reading no-manufest-file.yml manifest file to import to ${organizationId} Cron To Go organization... failed!`)
+    expect(ctx.stderr).to.contain(`Reading no-manifest-file.yml manifest file to import to ${organizationId} Cron To Go organization... failed!`)
   })
 })
