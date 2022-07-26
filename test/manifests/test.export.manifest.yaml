@@ -1,0 +1,20 @@
+jobs:
+  - nickname: my-job-1
+    schedule: '* * * * *'
+    timezone: UTC
+    dyno: Hobby
+    command: my command 1
+    timeout: 30
+    state: enabled
+  - nickname: my-job-2
+    schedule: '* * * * *'
+    timezone: UTC
+    dyno: Hobby
+    timeout: 30
+    state: paused
+  - nickname: my-job-3
+    schedule: '* * * * *'
+    timezone: UTC
+    command: my command 3
+    timeout: 30
+    state: paused
