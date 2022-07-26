@@ -23,7 +23,7 @@ export default class JobsList extends BaseCommand {
     json: flags.boolean({
       description: 'return the results as JSON',
     }),
-    csv: flags.boolean({exclusive: ['no-truncate'], description: 'output is csv format'}),
+    csv: flags.boolean({exclusive: ['no-truncate'], description: 'output in CSV format'}),
     columns: flags.string({description: 'only show provided columns (comma-seperated)'}),
     extended: flags.boolean({char: 'x', description: 'show extra columns'}),
     'no-truncate': flags.boolean({exclusive: ['csv'], description: 'do not truncate output to fit screen'}),
