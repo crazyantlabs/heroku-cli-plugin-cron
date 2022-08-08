@@ -1,6 +1,6 @@
 {
   "name": "heroku-cron",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Heroku CLI plugin for Cron To Go",
   "author": "Moty Michaely @motymichaely",
   "bin": {
@@ -37,7 +37,7 @@
     "js-yaml": "^4.1.0",
     "listr": "^0.14.3",
     "lodash": "^4.17.21",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.34",
     "validator": "^13.7.0"
   },
@@ -48,7 +48,7 @@
     "@types/eventsource": "^1.1.9",
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.9.4",
-    "@types/validator": "^13.7.3",
+    "@types/validator": "^13.7.4",
     "chai": "^4",
     "eslint": "^7.32.0",
     "eslint-config-oclif": "^4",
@@ -60,10 +60,10 @@
     "nyc": "^15.1.0",
     "oclif": "^2",
     "shx": "^0.3.4",
-    "sinon": "^13.0.1",
-    "ts-node": "^10.8.1",
+    "sinon": "^13.0.2",
+    "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.7.4"
   },
   "oclif": {
     "bin": "heroku",
