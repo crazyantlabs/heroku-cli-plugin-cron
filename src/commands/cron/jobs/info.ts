@@ -61,6 +61,7 @@ export default class JobsInfo extends BaseCommand {
         State: res.State === JobState.ENABLED ? color.green(res.State) : color.gray(res.State),
         Schedule: res.ScheduleExpression,
         Timezone: res.Timezone,
+        Retries: res.Retries,
         Created: formatDate(res.CreatedAt),
         Updated: formatDate(res.UpdatedAt),
       })

@@ -67,6 +67,9 @@ export default class JobsList extends BaseCommand {
           Command: {header: 'Target', get: (job:Job) => {
             return job.Target.Command || '-'
           }},
+          Retries: {header: 'Retries', extended: true, get: (job:Job) => {
+            return job.Retries || '-'
+          }},
           CreatedAt: {header: 'Created', extended: true, get: (job:Job) => {
             return formatDate(job.CreatedAt)
           }},

@@ -194,6 +194,22 @@ class ValidationService {
         args: [Object.values(JobState)],
         validWhen: true,
         message: `Unfortunately, state can be one of: ${Object.values(JobState).join(', ')} .`,
+      }, {
+        field: 'Retries',
+        method: 'isInt',
+        validWhen: true,
+        args: [{
+          max: 20, allow_leading_zeroes: false,
+        }],
+        message: "Unfortunately, retries can't be greater than 20.",
+      }, {
+        field: 'Retries',
+        method: 'isInt',
+        validWhen: true,
+        args: [{
+          min: 0, allow_leading_zeroes: false,
+        }],
+        message: "Unfortunately, retries can't be lower than 0.",
       },
     ])
   }

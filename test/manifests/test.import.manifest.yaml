@@ -14,3 +14,4 @@ jobs:
     dyno: 'Hobby'
     timeout: 30
     state: 'enabled'
+    retries: 5

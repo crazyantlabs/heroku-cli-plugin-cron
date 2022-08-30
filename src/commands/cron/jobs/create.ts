@@ -55,6 +55,10 @@ export default class JobsCreate extends BaseCommand {
       required: false,
       options: Object.values(JobState),
     }),
+    retries: flags.integer({
+      description: 'number of attempts to make to run a job using the exponential back-off procedure',
+      required: false,
+    }),
   }
 
   static args = []
@@ -125,6 +129,14 @@ export default class JobsCreate extends BaseCommand {
           return validateAnswer('Target.TimeToLive', input)
         },
       }, {
+        type: 'number',
+        name: 'retries',
+        message: 'What is the job retries limit?',
+        default: 2,
+        validate(input) {
+          return validateAnswer('Retries', input)
+        },
+      }, {
         type: 'list',
         name: 'state',
         message: 'What state do you want for this job?',
@@ -149,6 +161,7 @@ export default class JobsCreate extends BaseCommand {
           Command: answers.command,
           TimeToLive: answers.timeout,
         },
+        Retries: answers.retries,
         State: answers.state,
       }
 

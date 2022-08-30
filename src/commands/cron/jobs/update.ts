@@ -54,6 +54,10 @@ export default class JobsUpdate extends BaseCommand {
       required: false,
       options: Object.values(JobState),
     }),
+    retries: flags.integer({
+      description: 'number of attempts to make to run a job using the exponential back-off procedure',
+      required: false,
+    }),
   }
 
   static args = [
@@ -84,6 +88,7 @@ export default class JobsUpdate extends BaseCommand {
       if (_.has(flags, 'command')) _.set(jobUpdatePayload, 'Target.Command', flags.command)
       if (_.has(flags, 'timeout')) _.set(jobUpdatePayload, 'Target.TimeToLive', flags.timeout)
       if (_.has(flags, 'state')) _.set(jobUpdatePayload, 'State', flags.state)
+      if (_.has(flags, 'retries')) _.set(jobUpdatePayload, 'Retries', flags.retries)
 
       // Validate jobUpdatePayload
       const validation = ValidationService.getJobValidationService().validate(jobUpdatePayload)

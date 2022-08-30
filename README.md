@@ -35,7 +35,7 @@ $ npm install -g heroku-cron
 $ heroku COMMAND
 running command...
 $ heroku (--version|-v)
-heroku-cron/1.0.11 darwin-x64 node-v16.15.0
+heroku-cron/1.1.0 darwin-x64 node-v16.15.0
 $ heroku --help [COMMAND]
 USAGE
   $ heroku COMMAND
@@ -83,7 +83,7 @@ EXAMPLES
   $ heroku cron --app your-app --json
 ```
 
-_See code: [src/commands/cron/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/index.ts)_
+_See code: [src/commands/cron/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/index.ts)_
 
 ## `heroku cron:jobs`
 
@@ -117,7 +117,7 @@ EXAMPLES
   $ heroku cron:jobs --app=your-app --csv
 ```
 
-_See code: [src/commands/cron/jobs/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/index.ts)_
+_See code: [src/commands/cron/jobs/index.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/index.ts)_
 
 ## `heroku cron:jobs:clear`
 
@@ -145,7 +145,7 @@ EXAMPLES
   $ heroku cron:jobs:clear --app your-app --confirm your-app
 ```
 
-_See code: [src/commands/cron/jobs/clear.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/clear.ts)_
+_See code: [src/commands/cron/jobs/clear.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/clear.ts)_
 
 ## `heroku cron:jobs:create`
 
@@ -156,7 +156,7 @@ USAGE
   $ heroku cron:jobs:create -a <value> [-r <value>] [--json] [--nickname <value>] [--schedule <value>] [--timezone
     <value>] [--command <value>] [--dyno
     Free|Hobby|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
-    [--state enabled|paused]
+    [--state enabled|paused] [--retries <value>]
 
 FLAGS
   -a, --app=<value>     (required) app to run command against
@@ -168,6 +168,7 @@ FLAGS
                         Free|Hobby|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
   --json                return the results as JSON
   --nickname=<value>    nickname of the job. Leave blank to use the job command
+  --retries=<value>     number of attempts to make to run a job using the exponential back-off procedure
   --schedule=<value>    schedule of the job specified using unix-cron format. The minimum precision is 1 minute
   --state=<option>      state of the job
                         <options: enabled|paused>
@@ -185,7 +186,7 @@ EXAMPLES
   $ heroku cron:jobs:create --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/create.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/create.ts)_
+_See code: [src/commands/cron/jobs/create.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/create.ts)_
 
 ## `heroku cron:jobs:delete JOB`
 
@@ -216,7 +217,7 @@ EXAMPLES
   $ heroku cron:jobs:delete 01234567-89ab-cdef-0123-456789abcdef --app your-app --confirm 01234567-89ab-cdef-0123-456789abcdef
 ```
 
-_See code: [src/commands/cron/jobs/delete.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/delete.ts)_
+_See code: [src/commands/cron/jobs/delete.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/delete.ts)_
 
 ## `heroku cron:jobs:export FILENAME`
 
@@ -245,7 +246,7 @@ EXAMPLES
   $ heroku cron:jobs:export /tmp/manifest.yml --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/export.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/export.ts)_
+_See code: [src/commands/cron/jobs/export.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/export.ts)_
 
 ## `heroku cron:jobs:import FILENAME`
 
@@ -280,7 +281,7 @@ EXAMPLES
   $ heroku cron:jobs:import manifest.yml --app your-app --delete --confirm your-app
 ```
 
-_See code: [src/commands/cron/jobs/import.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/import.ts)_
+_See code: [src/commands/cron/jobs/import.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/import.ts)_
 
 ## `heroku cron:jobs:info JOB`
 
@@ -309,7 +310,7 @@ EXAMPLES
   $ heroku cron:jobs:info 01234567-89ab-cdef-0123-456789abcdef --app your-app --json
 ```
 
-_See code: [src/commands/cron/jobs/info.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/info.ts)_
+_See code: [src/commands/cron/jobs/info.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/info.ts)_
 
 ## `heroku cron:jobs:logs JOB`
 
@@ -343,7 +344,7 @@ EXAMPLES
   $ heroku cron:jobs:logs 01234567-89ab-cdef-0123-456789abcdef --app your-app --tail
 ```
 
-_See code: [src/commands/cron/jobs/logs.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/logs.ts)_
+_See code: [src/commands/cron/jobs/logs.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/logs.ts)_
 
 ## `heroku cron:jobs:pause JOB`
 
@@ -371,7 +372,7 @@ EXAMPLES
   $ heroku cron:jobs:pause 01234567-89ab-cdef-0123-456789abcdef --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/pause.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/pause.ts)_
+_See code: [src/commands/cron/jobs/pause.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/pause.ts)_
 
 ## `heroku cron:jobs:resume JOB`
 
@@ -399,7 +400,7 @@ EXAMPLES
   $ heroku cron:jobs:resume 01234567-89ab-cdef-0123-456789abcdef --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/resume.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/resume.ts)_
+_See code: [src/commands/cron/jobs/resume.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/resume.ts)_
 
 ## `heroku cron:jobs:run JOB`
 
@@ -439,7 +440,7 @@ EXAMPLES
   $ heroku cron:jobs:run 01234567-89ab-cdef-0123-456789abcdef --app your-app --tail --confirm 01234567-89ab-cdef-0123-456789abcdef
 ```
 
-_See code: [src/commands/cron/jobs/run.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/run.ts)_
+_See code: [src/commands/cron/jobs/run.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/run.ts)_
 
 ## `heroku cron:jobs:trigger JOB`
 
@@ -488,7 +489,7 @@ USAGE
   $ heroku cron:jobs:update [JOB] -a <value> [-r <value>] [--json] [--nickname <value>] [--schedule <value>]
     [--timezone <value>] [--command <value>] [--dyno
     Free|Hobby|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
-    [--state enabled|paused]
+    [--state enabled|paused] [--retries <value>]
 
 ARGUMENTS
   JOB  unique ID of the job
@@ -503,6 +504,7 @@ FLAGS
                         Free|Hobby|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
   --json                return the results as JSON
   --nickname=<value>    nickname of the job. Leave blank to use the job command
+  --retries=<value>     number of attempts to make to run a job using the exponential back-off procedure
   --schedule=<value>    schedule of the job specified using unix-cron format. The minimum precision is 1 minute
   --state=<option>      state of the job
                         <options: enabled|paused>
@@ -520,5 +522,5 @@ EXAMPLES
   $ heroku cron:jobs:create --app your-app
 ```
 
-_See code: [src/commands/cron/jobs/update.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.0.11/src/commands/cron/jobs/update.ts)_
+_See code: [src/commands/cron/jobs/update.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.1.0/src/commands/cron/jobs/update.ts)_
 <!-- commandsstop -->

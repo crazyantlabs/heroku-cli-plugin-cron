@@ -62,6 +62,7 @@ export interface Job {
     State: JobExecutionState;
     CreatedAt: number;
   },
+  Retries: number;
   CreatedAt: number;
   UpdatedAt: number;
   [k: string]: any;
@@ -117,6 +118,7 @@ export interface ManifestJob {
   timezone: string;
   command: string;
   timeout: number;
+  retries: number;
   state: string;
   [k: string]: any;
 }

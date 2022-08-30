@@ -56,6 +56,7 @@ export default class JobsExport extends BaseCommand {
             dyno: _.get(job, 'Target.Size'),
             command: _.get(job, 'Target.Command'),
             timeout: _.get(job, 'Target.TimeToLive'),
+            retries: _.get(job, 'Retries'),
             state: _.get(job, 'State'),
           }
         }),

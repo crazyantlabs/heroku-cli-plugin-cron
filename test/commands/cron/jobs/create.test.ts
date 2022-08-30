@@ -28,6 +28,7 @@ const jobStub = {
     State: 'running',
     CreatedAt: '2020-01-01T12:00:00Z',
   },
+  Retries: 3,
   CreatedAt: '2020-01-01T12:00:00Z',
   UpdatedAt: '2020-01-01T12:00:00Z',
 }
@@ -38,6 +39,7 @@ const createTimezoneJobStub = _.merge({}, jobStub, {Timezone: 'GMT'})
 const createCommandJobStub = _.merge({}, jobStub, {Target: {Command: 'created-command'}})
 const createDynoJobStub = _.merge({}, jobStub, {Target: {Size: 'Standard-1X'}})
 const createTimeoutJobStub = _.merge({}, jobStub, {Target: {TimeToLive: 700}})
+const createRetriesJobStub = _.merge({}, jobStub, {Retries: 5})
 const createStateJobStub = _.merge({}, jobStub, {State: 'paused'})
 const multiUpdateJobStub = _.merge({}, jobStub, {Alias: 'multi-creates', State: 'paused'})
 
@@ -62,6 +64,7 @@ describe('cron:jobs:create', () => {
         dyno: stub.Target?.Size,
         command: stub.Target?.Command,
         timeout: stub.Target?.TimeToLive,
+        retries: stub.Retries,
         state: stub.State,
       })
     })
@@ -141,6 +144,14 @@ describe('cron:jobs:create', () => {
     expect(ctx.stdout).to.contain('"TimeToLive": 700')
   })
 
+  testFactory(createRetriesJobStub)
+  .stdout()
+  .command(['cron:jobs:create', '--app', app, '--retries', '5', '--json'])
+  .it('shows detailed information about newly created Cron To Go job with retries in JSON format', ctx => {
+    expect(ctx.stdout).to.contain('"Alias": "my-job"')
+    expect(ctx.stdout).to.contain('"Retries": 5')
+  })
+
   testFactory(multiUpdateJobStub)
   .stdout()
   .command(['cron:jobs:create', '--app', app, '--nickname', multiUpdateJobStub.Alias, '--state', multiUpdateJobStub.State, '--json'])
@@ -163,6 +174,7 @@ describe('cron:jobs:create', () => {
       schedule: 'invalid expression',
       command: jobStub.Target?.Command,
       timeout: jobStub.Target?.TimeToLive,
+      retries: jobStub.Retries,
       state: jobStub.State,
     })
   })
@@ -190,6 +202,7 @@ describe('cron:jobs:create', () => {
       dyno: jobStub.Target?.Size,
       command: jobStub.Target?.Command,
       timeout: jobStub.Target?.TimeToLive,
+      retries: jobStub.Retries,
       state: jobStub.State,
     })
   })
