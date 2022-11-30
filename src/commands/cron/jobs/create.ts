@@ -108,7 +108,7 @@ export default class JobsCreate extends BaseCommand {
         message: 'What Dyno size do you want to be used for this job?',
         choices: Object.values(DynoSize),
         pageSize: Object.values(DynoSize).length,
-        default: DynoSize.HOBBY,
+        default: DynoSize.BASIC,
         loop: false,
         validate(input) {
           return validateAnswer('Target.Size', input)

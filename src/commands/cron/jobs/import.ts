@@ -175,7 +175,7 @@ export default class JobsImport extends BaseCommand {
         ScheduleType: ScheduleType.CRON, // Currently, only cron schedule type is supported
         Target: {
           Type: TargetType.DYNO, // Currently, only dyno target type supported
-          Size: DynoSize.HOBBY,
+          Size: DynoSize.BASIC,
           Command: '',
           TimeToLive: 1800,
         },

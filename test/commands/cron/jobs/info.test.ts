@@ -19,7 +19,7 @@ const jobStub = {
   ScheduleExpression: '* * * * *',
   Target: {
     Command: 'my command',
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {
@@ -63,7 +63,7 @@ describe('cron:jobs:info', () => {
     expect(ctx.stdout).to.contain('Updated:  2020-01-01 12:00 UTC')
     expect(ctx.stdout).to.contain('=== Target')
     expect(ctx.stdout).to.contain('Command: my command')
-    expect(ctx.stdout).to.contain('Dyno:    Hobby')
+    expect(ctx.stdout).to.contain('Dyno:    Basic')
     expect(ctx.stdout).to.contain('Timeout: 30')
     expect(ctx.stdout).to.contain('=== Last run')
     expect(ctx.stdout).to.contain('Id:     attempt-123456')
@@ -85,7 +85,7 @@ describe('cron:jobs:info', () => {
     expect(ctx.stdout).to.contain(`=== Job info for ${jobId}`)
     expect(ctx.stdout).to.not.contain('=== Target')
     expect(ctx.stdout).to.not.contain('Command: my command')
-    expect(ctx.stdout).to.not.contain('Dyno:    Hobby')
+    expect(ctx.stdout).to.not.contain('Dyno:    Basic')
     expect(ctx.stdout).to.not.contain('Timeout: 30')
     expect(ctx.stdout).to.contain('=== Last run')
   })

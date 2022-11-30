@@ -3,7 +3,7 @@ jobs:
     timezone: 'UTC'
     schedule: '* * * * *'
     command: 'my command'
-    dyno: 'Hobby'
+    dyno: 'Basic'
     timeout: 30
     state: 'enabled'
 
@@ -11,7 +11,7 @@ jobs:
     timezone: 'UTC'
     schedule: '* * * * *'
     command: 'my command 2'
-    dyno: 'Hobby'
+    dyno: 'Basic'
     timeout: 30
     state: 'enabled'
     retries: 5

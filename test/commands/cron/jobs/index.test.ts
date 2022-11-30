@@ -18,7 +18,7 @@ const jobsListStub = [{
   ScheduleExpression: '* * * * *',
   Target: {
     Command: 'my command 1',
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {
@@ -35,7 +35,7 @@ const jobsListStub = [{
   Timezone: 'UTC',
   ScheduleExpression: '* * * * *',
   Target: {
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {
@@ -82,8 +82,8 @@ describe('cron:jobs', () => {
   .command(['cron:jobs', '--app', app])
   .it('shows detailed information about Cron To Go jobs in table format', ctx => {
     expect(ctx.stdout).to.contain('=== Cron To Go jobs in app')
-    expect(ctx.stdout).to.contain('my-job-1 * * * * * UTC      enabled Hobby my command 1')
-    expect(ctx.stdout).to.contain('my-job-2 * * * * * UTC      paused  Hobby -')
+    expect(ctx.stdout).to.contain('my-job-1 * * * * * UTC      enabled Basic my command 1')
+    expect(ctx.stdout).to.contain('my-job-2 * * * * * UTC      paused  Basic -')
     expect(ctx.stdout).to.contain('my-job-3 * * * * * UTC      paused  -     my command 3')
   })
 
@@ -92,8 +92,8 @@ describe('cron:jobs', () => {
   .command(['cron:jobs', '--app', app, '--csv'])
   .it('shows detailed information about Cron To Go jobs in CSV format', ctx => {
     expect(ctx.stdout).to.not.contain('=== Cron To Go jobs in app')
-    expect(ctx.stdout).to.contain('my-job-1,* * * * *,UTC,enabled,Hobby,my command 1')
-    expect(ctx.stdout).to.contain('my-job-2,* * * * *,UTC,paused,Hobby,-')
+    expect(ctx.stdout).to.contain('my-job-1,* * * * *,UTC,enabled,Basic,my command 1')
+    expect(ctx.stdout).to.contain('my-job-2,* * * * *,UTC,paused,Basic,-')
     expect(ctx.stdout).to.contain('my-job-3,* * * * *,UTC,paused,-,my command 3')
   })
 

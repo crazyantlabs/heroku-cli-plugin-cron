@@ -29,7 +29,7 @@ const jobStub = {
   ScheduleExpression: '* * * * *',
   Target: {
     Command: 'my command',
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {
@@ -49,7 +49,7 @@ const job2Stub = {
   ScheduleExpression: '* * * * *',
   Target: {
     Command: 'my command 2',
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {

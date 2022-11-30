@@ -30,8 +30,6 @@ export enum JobExecutionState {
 }
 
 export enum DynoSize {
-  FREE = 'Free',
-  HOBBY = 'Hobby',
   ECO = 'Eco',
   BASIC = 'Basic',
   STANDARD_1X = 'Standard-1X',

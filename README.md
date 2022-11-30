@@ -155,8 +155,8 @@ create a job on Cron To Go
 USAGE
   $ heroku cron:jobs:create -a <value> [-r <value>] [--json] [--nickname <value>] [--schedule <value>] [--timezone
     <value>] [--command <value>] [--dyno
-    Free|Hobby|Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout
-    <value>] [--state enabled|paused] [--retries <value>]
+    Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
+    [--state enabled|paused] [--retries <value>]
 
 FLAGS
   -a, --app=<value>     (required) app to run command against
@@ -164,8 +164,8 @@ FLAGS
   --command=<value>     command to run as a one-off dyno either as the command to execute, or a process type that is
                         present in your apps's Procfile
   --dyno=<option>       size of the one-off dyno
-                        <options: Free|Hobby|Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Pr
-                        ivate-M|Private-L>
+                        <options:
+                        Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
   --json                return the results as JSON
   --nickname=<value>    nickname of the job. Leave blank to use the job command
   --retries=<value>     number of attempts to make to run a job using the exponential back-off procedure
@@ -488,8 +488,8 @@ update a job on Cron To Go
 USAGE
   $ heroku cron:jobs:update [JOB] -a <value> [-r <value>] [--json] [--nickname <value>] [--schedule <value>]
     [--timezone <value>] [--command <value>] [--dyno
-    Free|Hobby|Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout
-    <value>] [--state enabled|paused] [--retries <value>]
+    Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
+    [--state enabled|paused] [--retries <value>]
 
 ARGUMENTS
   JOB  unique ID of the job
@@ -500,8 +500,8 @@ FLAGS
   --command=<value>     command to run as a one-off dyno either as the command to execute, or a process type that is
                         present in your apps's Procfile
   --dyno=<option>       size of the one-off dyno
-                        <options: Free|Hobby|Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Pr
-                        ivate-M|Private-L>
+                        <options:
+                        Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
   --json                return the results as JSON
   --nickname=<value>    nickname of the job. Leave blank to use the job command
   --retries=<value>     number of attempts to make to run a job using the exponential back-off procedure

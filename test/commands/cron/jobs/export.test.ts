@@ -24,7 +24,7 @@ const jobsListStub = [{
   ScheduleExpression: '* * * * *',
   Target: {
     Command: 'my command 1',
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {
@@ -41,7 +41,7 @@ const jobsListStub = [{
   Timezone: 'UTC',
   ScheduleExpression: '* * * * *',
   Target: {
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {

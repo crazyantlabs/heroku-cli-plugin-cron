@@ -3,7 +3,7 @@ jobs:
     timezone: 'UTC'
     schedule: '*/1 * * * *'
     command: 'echo "Every Minute Job"'
-    dyno: 'Hobby'
+    dyno: 'Basic'
     timeout: 300
     state: 'enabled'
 
@@ -11,7 +11,7 @@ jobs:
     timezone: 'America/New_York'
     schedule: '0 9 * * *'
     command: 'echo "Daily Job at 09:00"'
-    dyno: 'Hobby'
+    dyno: 'Basic'
     timeout: 300
     state: 'enabled'
 
@@ -19,6 +19,6 @@ jobs:
     timezone: 'UTC'
     schedule: '0 9 1 * *'
     command: 'echo "Every month (on the 1st at 09:00)"'
-    dyno: 'Hobby'
+    dyno: 'Basic'
     timeout: 300
     state: 'paused'

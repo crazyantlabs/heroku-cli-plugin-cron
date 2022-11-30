@@ -20,7 +20,7 @@ const jobStub = {
   ScheduleExpression: '* * * * *',
   Target: {
     Command: 'my command',
-    Size: 'Hobby',
+    Size: 'Basic',
     TimeToLive: 30,
   },
   LastAttempt: {
