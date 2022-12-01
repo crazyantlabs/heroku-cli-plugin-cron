@@ -20,7 +20,7 @@
     "/oclif.manifest.json"
   ],
   "dependencies": {
-    "@heroku-cli/color": "^1.1.14",
+    "@heroku-cli/color": "^1.1.15",
     "@heroku-cli/command": "^8.5.0",
     "@heroku-cli/schema": "^1.0.25",
     "@heroku/eventsource": "^1.0.7",
