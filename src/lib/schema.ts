@@ -6,6 +6,7 @@ export enum OrganizationState {
 
 export enum ScheduleType {
   CRON = 'cron',
+  RATE = 'rate',
 }
 
 export enum TargetType {
