@@ -38,6 +38,7 @@ const updateDynoJobStub = _.merge({}, jobStub, {Target: {Size: 'Standard-1X'}})
 const updateTimeoutJobStub = _.merge({}, jobStub, {Target: {TimeToLive: 700}})
 const updateStateJobStub = _.merge({}, jobStub, {State: 'paused'})
 const multiUpdateJobStub = _.merge({}, jobStub, {Alias: 'multi-updates', State: 'paused'})
+const updateRateJobStub = _.merge({}, jobStub, {ScheduleExpression: '3 hours'})
 
 const invalidScheduleExpression = '* *'
 
@@ -126,10 +127,10 @@ describe('cron:jobs:update', () => {
     expect(ctx.stdout).to.contain('"State": "paused"')
   })
 
-  testFactory(multiUpdateJobStub)
+  testFactory(updateRateJobStub)
   .stdout()
-  .command(['cron:jobs:update', jobId, '--app', app, '--nickname', multiUpdateJobStub.Alias, '--state', multiUpdateJobStub.State])
-  .it('shows detailed information about Cron To Go job with nickname and state updates', ctx => {
+  .command(['cron:jobs:update', jobId, '--app', app, '--nickname', updateRateJobStub.Alias, '--state', multiUpdateJobStub.State])
+  .it('shows detailed information about Cron To Go job with schedule expression updates', ctx => {
     expect(ctx.stdout).to.contain(`Successfully updated job ${jobId}`)
   })
 
