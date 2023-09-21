@@ -1,8 +1,7 @@
 import {CliUx} from '@oclif/core'
-import {flags} from '@heroku-cli/command'
 import color from '@heroku-cli/color'
 
-import {Job, JobState, DynoSize} from '../../../lib/schema'
+import {Job} from '../../../lib/schema'
 
 import {fetchAuthInfo} from '../../../lib/fetcher'
 import BaseCommand from '../../../lib/base'

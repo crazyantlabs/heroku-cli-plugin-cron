@@ -115,20 +115,6 @@ class ValidationService {
         }
       }
     }
-
-    if (!validation.isValid) return validation
-
-    const timezone = _.get(state, 'timezone', 'UTC')
-    const scheduleType = _.get(state, 'ScheduleType', ScheduleType.CRON) as ScheduleType
-    if (timezone !== 'UTC' && scheduleType === ScheduleType.RATE) {
-      validation.ScheduleExpression = {
-        isInvalid: true,
-        message: 'Unfortunately, Rate expressions are only supported in UTC timezones.',
-      }
-      validation.isValid = false
-    }
-
-    return validation
   }
 
   // create a validation object for a valid state

@@ -40,7 +40,7 @@ jobs:
     state: 'enabled'
   
   - nickname: Every 2 days Rate expression job
-    timezone: 'UTC'
+    timezone: 'America/New_York'
     schedule: '2 days'
     command: 'echo "Every 2 Days Job"'
     dyno: 'Basic'
