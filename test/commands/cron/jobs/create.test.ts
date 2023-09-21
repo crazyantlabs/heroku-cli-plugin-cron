@@ -42,6 +42,7 @@ const createTimeoutJobStub = _.merge({}, jobStub, {Target: {TimeToLive: 700}})
 const createRetriesJobStub = _.merge({}, jobStub, {Retries: 5})
 const createStateJobStub = _.merge({}, jobStub, {State: 'paused'})
 const multiUpdateJobStub = _.merge({}, jobStub, {Alias: 'multi-creates', State: 'paused'})
+const createRateJobStub = _.merge({}, jobStub, {ScheduleExpression: '3 hours'})
 
 describe('cron:jobs:create', () => {
   const testFactory = stub => {
@@ -158,6 +159,13 @@ describe('cron:jobs:create', () => {
   .it('shows detailed information about newly created Cron To Go job with alias and state in JSON format', ctx => {
     expect(ctx.stdout).to.contain('"Alias": "multi-creates"')
     expect(ctx.stdout).to.contain('"State": "paused"')
+  })
+
+  testFactory(createRateJobStub)
+  .stdout()
+  .command(['cron:jobs:create', '--app', app, '--nickname', createRateJobStub.Alias, '--state', createRateJobStub.State, '--json'])
+  .it('shows detailed information about newly created Cron To Go job with alias and state in JSON format', ctx => {
+    expect(ctx.stdout).to.contain('"ScheduleExpression": "3 hours"')
   })
 
   test

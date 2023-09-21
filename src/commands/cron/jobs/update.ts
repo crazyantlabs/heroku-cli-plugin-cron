@@ -1,14 +1,15 @@
 import {CliUx} from '@oclif/core'
-import {flags} from '@heroku-cli/command'
 import color from '@heroku-cli/color'
 
-import {Job, JobState, DynoSize} from '../../../lib/schema'
+import {Job} from '../../../lib/schema'
 
 import {fetchAuthInfo} from '../../../lib/fetcher'
 import BaseCommand from '../../../lib/base'
 import ValidationService from '../../../lib/validation-service'
 
 import * as _ from 'lodash'
+
+import JobsCreate from './create'
 
 export default class JobsUpdate extends BaseCommand {
   static description = 'update a job on Cron To Go\nRead more about this feature at https://devcenter.heroku.com/articles/crontogo'
@@ -19,45 +20,7 @@ export default class JobsUpdate extends BaseCommand {
   ]
 
   static flags = {
-    app: flags.app({required: true}),
-    remote: flags.remote(),
-    json: flags.boolean({
-      description: 'return the results as JSON',
-    }),
-    nickname: flags.string({
-      description: 'nickname of the job. Leave blank to use the job command',
-      required: false,
-    }),
-    schedule: flags.string({
-      description: 'schedule of the job specified using unix-cron format. The minimum precision is 1 minute',
-      required: false,
-    }),
-    timezone: flags.string({
-      description: 'time zone of the job. UTC time zone is recommended for avoiding daylight savings time issues',
-      required: false,
-    }),
-    command: flags.string({
-      description: 'command to run as a one-off dyno either as the command to execute, or a process type that is present in your apps\'s Procfile',
-      required: false,
-    }),
-    dyno: flags.string({
-      description: 'size of the one-off dyno',
-      required: false,
-      options: Object.values(DynoSize),
-    }),
-    timeout: flags.integer({
-      description: 'number of seconds until the one-off dyno expires, after which it will soon be killed',
-      required: false,
-    }),
-    state: flags.string({
-      description: 'state of the job',
-      required: false,
-      options: Object.values(JobState),
-    }),
-    retries: flags.integer({
-      description: 'number of attempts to make to run a job using the exponential back-off procedure',
-      required: false,
-    }),
+    ...JobsCreate.flags,
   }
 
   static args = [

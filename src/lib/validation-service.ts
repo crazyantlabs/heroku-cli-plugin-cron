@@ -5,7 +5,7 @@ import * as cronParser from 'cron-parser'
 import * as moment from 'moment-timezone'
 import * as _ from 'lodash'
 
-function isCronExpression(expression: string, options = {}) {
+function validateCronExpression(expression: string, options = {}) {
   try {
     const parts = expression.split(' ')
 
@@ -24,6 +24,43 @@ function isCronExpression(expression: string, options = {}) {
   } catch {
     return false
   }
+}
+
+const rateExpressionPattern =
+  /^(\d+)\s+(minute|minutes|hour|hours|day|days)$/
+function validateRateExpression(expression: string) {
+  // Check if the expression matches the pattern
+  const match = expression.match(rateExpressionPattern)
+  if (!match) {
+    return false // Expression doesn't match the pattern
+  }
+
+  const value = Number(match[1]) // Extract the value from the match
+  const unit = match[2] // Extract the unit from the match
+
+  // Check if the value is a positive number
+  if (Number.isNaN(value) || value <= 0) {
+    return false
+  }
+
+  // Check if the unit is valid based on the value
+  if (value === 1 && unit.endsWith('s')) {
+    return false // Invalid unit for value of 1
+  }
+
+  if (value > 1 && !unit.endsWith('s')) {
+    return false // Invalid unit for value greater than 1
+  }
+
+  return true
+}
+
+export function isRateExpression(expression: string): boolean {
+  return rateExpressionPattern.test(expression)
+}
+
+function validateScheduleExpression(expression: string, options = {}) {
+  return isRateExpression(expression) ? validateRateExpression(expression) : validateCronExpression(expression, options)
 }
 
 interface Validation {
@@ -57,7 +94,7 @@ class ValidationService {
       if (!validation[rule.field].isInvalid && // determine the field value, the method to invoke and
       // optional args from the rule definition
       // If state doesn't have the rule field, than we ignore validation
-         _.has(state, rule.field)) {
+        _.has(state, rule.field)) {
         const fieldValue = _.toString(_.get(state, rule.field))
         const args = rule.args || []
         const validationMethod  = typeof rule.method === 'string' ?
@@ -110,7 +147,7 @@ class ValidationService {
         message: "Unfortunately, you can't leave schedule blank.",
       }, {
         field: 'ScheduleExpression',
-        method: isCronExpression,
+        method: validateScheduleExpression,
         validWhen: true,
         message: "Unfortunately, schedule expression doesn't seem to be valid.",
       }, {
