@@ -115,6 +115,8 @@ class ValidationService {
         }
       }
     }
+
+    return validation
   }
 
   // create a validation object for a valid state
