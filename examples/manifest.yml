@@ -22,3 +22,27 @@ jobs:
     dyno: 'Basic'
     timeout: 300
     state: 'paused'
+
+  - nickname: Every minute Rate expression job
+    timezone: 'UTC'
+    schedule: '1 minute'
+    command: 'echo "Every Minute Job"'
+    dyno: 'Basic'
+    timeout: 300
+    state: 'enabled'
+
+  - nickname: Every 3 hours Rate expression job
+    timezone: 'UTC'
+    schedule: '3 hours'
+    command: 'echo "Every 3 Hours Job"'
+    dyno: 'Basic'
+    timeout: 300
+    state: 'enabled'
+  
+  - nickname: Every 2 days Rate expression job
+    timezone: 'UTC'
+    schedule: '2 days'
+    command: 'echo "Every 2 Days Job"'
+    dyno: 'Basic'
+    timeout: 300
+    state: 'enabled'

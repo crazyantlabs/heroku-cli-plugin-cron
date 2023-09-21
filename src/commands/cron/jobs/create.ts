@@ -7,7 +7,7 @@ import {Job, JobState, DynoSize, ScheduleType, TargetType} from '../../../lib/sc
 
 import {fetchAuthInfo} from '../../../lib/fetcher'
 import BaseCommand from '../../../lib/base'
-import ValidationService from '../../../lib/validation-service'
+import ValidationService, {isRateExpression} from '../../../lib/validation-service'
 
 import * as _ from 'lodash'
 
@@ -30,7 +30,7 @@ export default class JobsCreate extends BaseCommand {
       required: false,
     }),
     schedule: flags.string({
-      description: 'schedule of the job specified using unix-cron format. The minimum precision is 1 minute',
+      description: 'schedule of the job specified using unix-cron or rate expression format. The minimum precision is 1 minute',
       required: false,
     }),
     timezone: flags.string({
@@ -90,7 +90,7 @@ export default class JobsCreate extends BaseCommand {
       }, {
         type: 'string',
         name: 'schedule',
-        message: 'What schedule (in Cron syntax) do you want this job to run at?',
+        message: 'What schedule (in Cron or Rate syntax) do you want this job to run at?',
         validate(input) {
           return validateAnswer('ScheduleExpression', input)
         },
@@ -150,11 +150,13 @@ export default class JobsCreate extends BaseCommand {
       })
 
       const answers: any = await prompt(questions, flags)
+      const scheduleType = isRateExpression(answers.schedule) ? ScheduleType.RATE : ScheduleType.CRON
+
       const jobCreatePayload: Record<string, unknown> = {
         Alias: answers.nickname,
         ScheduleExpression: answers.schedule,
         Timezone: answers.timezone,
-        ScheduleType: ScheduleType.CRON, // Currently, only cron schedule type is supported
+        ScheduleType: scheduleType,
         Target: {
           Type: TargetType.DYNO, // Currently, only dyno target type supported
           Size: answers.dyno,
