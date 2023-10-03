@@ -35,7 +35,7 @@ $ npm install -g heroku-cron
 $ heroku COMMAND
 running command...
 $ heroku (--version|-v)
-heroku-cron/1.1.4 darwin-x64 node-v18.17.1
+heroku-cron/1.1.4 darwin-x64 node-v20.8.0
 $ heroku --help [COMMAND]
 USAGE
   $ heroku COMMAND
