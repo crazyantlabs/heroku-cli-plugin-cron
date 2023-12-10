@@ -152,7 +152,7 @@ create a job on Cron To Go
 USAGE
   $ heroku cron:jobs:create -a <value> [-r <value>] [--json] [--nickname <value>] [--schedule <value>] [--timezone
     <value>] [--command <value>] [--dyno
-    Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
+    Eco|Basic|Standard-1X|Standard-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
     [--state enabled|paused] [--retries <value>]
 
 FLAGS
@@ -162,7 +162,7 @@ FLAGS
                         present in your apps's Procfile
   --dyno=<option>       size of the one-off dyno
                         <options:
-                        Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
+                        Eco|Basic|Standard-1X|Standard-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
   --json                return the results as JSON
   --nickname=<value>    nickname of the job. Leave blank to use the job command
   --retries=<value>     number of attempts to make to run a job using the exponential back-off procedure
@@ -478,7 +478,7 @@ update a job on Cron To Go
 USAGE
   $ heroku cron:jobs:update [JOB] -a <value> [-r <value>] [--json] [--nickname <value>] [--schedule <value>]
     [--timezone <value>] [--command <value>] [--dyno
-    Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
+    Eco|Basic|Standard-1X|Standard-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L] [--timeout <value>]
     [--state enabled|paused] [--retries <value>]
 
 ARGUMENTS
@@ -491,7 +491,7 @@ FLAGS
                         present in your apps's Procfile
   --dyno=<option>       size of the one-off dyno
                         <options:
-                        Eco|Basic|Standard-1X|Standartd-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
+                        Eco|Basic|Standard-1X|Standard-2X|Performance-M|Performance-L|Private-S|Private-M|Private-L>
   --json                return the results as JSON
   --nickname=<value>    nickname of the job. Leave blank to use the job command
   --retries=<value>     number of attempts to make to run a job using the exponential back-off procedure

@@ -34,7 +34,7 @@ export enum DynoSize {
   ECO = 'Eco',
   BASIC = 'Basic',
   STANDARD_1X = 'Standard-1X',
-  STANDARD_2X = 'Standartd-2X',
+  STANDARD_2X = 'Standard-2X',
   PERFORMANCE_M = 'Performance-M',
   PERFORMANCE_L = 'Performance-L',
   PRIVATE_S = 'Private-S',
