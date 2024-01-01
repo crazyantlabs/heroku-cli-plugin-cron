@@ -47,7 +47,7 @@
     "@types/chai": "^4",
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.9.4",
-    "@types/validator": "^13.7.12",
+    "@types/validator": "^13.11.7",
     "chai": "^4",
     "eslint": "^7.32.0",
     "eslint-config-oclif": "^4",
