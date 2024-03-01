@@ -38,7 +38,7 @@
     "listr": "^0.14.3",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
-    "moment-timezone": "^0.5.44",
+    "moment-timezone": "^0.5.45",
     "validator": "^13.11.0"
   },
   "devDependencies": {
