@@ -59,6 +59,10 @@ export default class JobsCreate extends BaseCommand {
       description: 'number of attempts to make to run a job using the exponential back-off procedure',
       required: false,
     }),
+    jitter: flags.integer({
+      description: 'the amount of jitter to add to the schedule, in minutes',
+      required: false,
+    }),
   }
 
   static args = []

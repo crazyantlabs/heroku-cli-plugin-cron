@@ -27,6 +27,7 @@ const jobStub = {
     State: 'running',
     CreatedAt: '2020-01-01T12:00:00Z',
   },
+  Jitter: 5,
   CreatedAt: '2020-01-01T12:00:00Z',
   UpdatedAt: '2020-01-01T12:00:00Z',
 }
@@ -59,6 +60,7 @@ describe('cron:jobs:info', () => {
     expect(ctx.stdout).to.contain('State:    enabled')
     expect(ctx.stdout).to.contain('Schedule: * * * * *')
     expect(ctx.stdout).to.contain('Timezone: UTC')
+    expect(ctx.stdout).to.contain('Jitter:   5')
     expect(ctx.stdout).to.contain('Created:  2020-01-01 12:00 UTC')
     expect(ctx.stdout).to.contain('Updated:  2020-01-01 12:00 UTC')
     expect(ctx.stdout).to.contain('=== Target')

@@ -37,9 +37,15 @@ export enum DynoSize {
   STANDARD_2X = 'Standard-2X',
   PERFORMANCE_M = 'Performance-M',
   PERFORMANCE_L = 'Performance-L',
+  PERFORMANCE_L_RAM = 'Performance-L-RAM',
+  PERFORMANCE_XL = 'Performance-XL',
+  PERFORMANCE_2XL = 'Performance-2XL',
   PRIVATE_S = 'Private-S',
   PRIVATE_M = 'Private-M',
   PRIVATE_L = 'Private-L',
+  PRIVATE_L_RAM = 'Private-L-RAM',
+  PRIVATE_XL = 'Private-XL',
+  PRIVATE_2XL = 'Private-2XL',
 }
 
 export interface JobTarget {
@@ -64,6 +70,7 @@ export interface Job {
     CreatedAt: number;
   },
   Retries: number;
+  Jitter: number;
   CreatedAt: number;
   UpdatedAt: number;
   [k: string]: any;

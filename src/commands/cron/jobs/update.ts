@@ -52,6 +52,7 @@ export default class JobsUpdate extends BaseCommand {
       if (_.has(flags, 'timeout')) _.set(jobUpdatePayload, 'Target.TimeToLive', flags.timeout)
       if (_.has(flags, 'state')) _.set(jobUpdatePayload, 'State', flags.state)
       if (_.has(flags, 'retries')) _.set(jobUpdatePayload, 'Retries', flags.retries)
+      if (_.has(flags, 'jitter')) _.set(jobUpdatePayload, 'Jitter', flags.jitter)
 
       // Validate jobUpdatePayload
       const validation = ValidationService.getJobValidationService().validate(jobUpdatePayload)

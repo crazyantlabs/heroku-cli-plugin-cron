@@ -26,6 +26,7 @@ const jobsListStub = [{
     State: 'running',
     CreatedAt: '2020-01-01T12:00:00Z',
   },
+  Jitter: 5,
   CreatedAt: '2020-01-01T12:00:00Z',
   UpdatedAt: '2020-01-01T12:00:00Z',
 }, {
@@ -105,6 +106,7 @@ describe('cron:jobs', () => {
     expect(ctx.stdout).to.contain('"State": "enabled"')
     expect(ctx.stdout).to.contain('"Alias": "my-job-2"')
     expect(ctx.stdout).to.contain('"State": "paused"')
+    expect(ctx.stdout).to.contain('"Jitter": 5')
   })
 
   test

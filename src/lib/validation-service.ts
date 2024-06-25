@@ -247,6 +247,22 @@ class ValidationService {
           min: 0, allow_leading_zeroes: false,
         }],
         message: "Unfortunately, retries can't be lower than 0.",
+      }, {
+        field: 'Jitter',
+        method: 'isInt',
+        validWhen: true,
+        args: [{
+          max: 1440, allow_leading_zeroes: false,
+        }],
+        message: "Unfortunately, jitter can't be greater than 1440.",
+      }, {
+        field: 'Jitter',
+        method: 'isInt',
+        validWhen: true,
+        args: [{
+          min: 0, allow_leading_zeroes: false,
+        }],
+        message: "Unfortunately, jitter can't be lower than 0.",
       },
     ])
   }
