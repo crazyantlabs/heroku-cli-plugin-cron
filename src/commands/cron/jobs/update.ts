@@ -15,8 +15,8 @@ export default class JobsUpdate extends BaseCommand {
   static description = 'update a job on Cron To Go\nRead more about this feature at https://devcenter.heroku.com/articles/crontogo'
 
   static examples = [
-    '$ heroku cron:jobs:create -a your-app',
-    '$ heroku cron:jobs:create --app your-app',
+    '$ heroku cron:jobs:update -a your-app',
+    '$ heroku cron:jobs:update --app your-app',
   ]
 
   static flags = {

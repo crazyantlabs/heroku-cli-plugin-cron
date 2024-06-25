@@ -71,7 +71,7 @@ export default class JobsList extends BaseCommand {
             return job.Retries || '-'
           }},
           Jitter: {header: 'Jitter', extended: true, get: (job:Job) => {
-            return job.Retries || '-'
+            return job.Jitter || '-'
           }},
           CreatedAt: {header: 'Created', extended: true, get: (job:Job) => {
             return formatDate(job.CreatedAt)

@@ -143,7 +143,7 @@ export default class JobsCreate extends BaseCommand {
       }, {
         type: 'number',
         name: 'jitter',
-        message: 'What is the jitter?',
+        message: 'What is the jitter (in minutes)?',
         default: 0,
         validate(input) {
           return validateAnswer('Jitter', input)
