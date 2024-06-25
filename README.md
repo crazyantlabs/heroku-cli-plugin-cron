@@ -44,24 +44,20 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-- [heroku-cli-plugin-cron](#heroku-cli-plugin-cron)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`heroku cron`](#heroku-cron)
-  - [`heroku cron:jobs`](#heroku-cronjobs)
-  - [`heroku cron:jobs:clear`](#heroku-cronjobsclear)
-  - [`heroku cron:jobs:create`](#heroku-cronjobscreate)
-  - [`heroku cron:jobs:delete JOB`](#heroku-cronjobsdelete-job)
-  - [`heroku cron:jobs:export FILENAME`](#heroku-cronjobsexport-filename)
-  - [`heroku cron:jobs:import FILENAME`](#heroku-cronjobsimport-filename)
-  - [`heroku cron:jobs:info JOB`](#heroku-cronjobsinfo-job)
-  - [`heroku cron:jobs:logs JOB`](#heroku-cronjobslogs-job)
-  - [`heroku cron:jobs:pause JOB`](#heroku-cronjobspause-job)
-  - [`heroku cron:jobs:resume JOB`](#heroku-cronjobsresume-job)
-  - [`heroku cron:jobs:run JOB`](#heroku-cronjobsrun-job)
-  - [`heroku cron:jobs:trigger JOB`](#heroku-cronjobstrigger-job)
-  - [`heroku cron:jobs:update JOB`](#heroku-cronjobsupdate-job)
+* [`heroku cron`](#heroku-cron)
+* [`heroku cron:jobs`](#heroku-cronjobs)
+* [`heroku cron:jobs:clear`](#heroku-cronjobsclear)
+* [`heroku cron:jobs:create`](#heroku-cronjobscreate)
+* [`heroku cron:jobs:delete JOB`](#heroku-cronjobsdelete-job)
+* [`heroku cron:jobs:export FILENAME`](#heroku-cronjobsexport-filename)
+* [`heroku cron:jobs:import FILENAME`](#heroku-cronjobsimport-filename)
+* [`heroku cron:jobs:info JOB`](#heroku-cronjobsinfo-job)
+* [`heroku cron:jobs:logs JOB`](#heroku-cronjobslogs-job)
+* [`heroku cron:jobs:pause JOB`](#heroku-cronjobspause-job)
+* [`heroku cron:jobs:resume JOB`](#heroku-cronjobsresume-job)
+* [`heroku cron:jobs:run JOB`](#heroku-cronjobsrun-job)
+* [`heroku cron:jobs:trigger JOB`](#heroku-cronjobstrigger-job)
+* [`heroku cron:jobs:update JOB`](#heroku-cronjobsupdate-job)
 
 ## `heroku cron`
 
@@ -513,9 +509,9 @@ DESCRIPTION
   Read more about this feature at https://devcenter.heroku.com/articles/crontogo
 
 EXAMPLES
-  $ heroku cron:jobs:create -a your-app
+  $ heroku cron:jobs:update -a your-app
 
-  $ heroku cron:jobs:create --app your-app
+  $ heroku cron:jobs:update --app your-app
 ```
 
 _See code: [src/commands/cron/jobs/update.ts](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/v1.2.2/src/commands/cron/jobs/update.ts)_
