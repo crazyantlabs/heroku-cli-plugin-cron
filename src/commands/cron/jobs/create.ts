@@ -141,6 +141,14 @@ export default class JobsCreate extends BaseCommand {
           return validateAnswer('Retries', input)
         },
       }, {
+        type: 'number',
+        name: 'jitter',
+        message: 'What is the jitter?',
+        default: 0,
+        validate(input) {
+          return validateAnswer('Jitter', input)
+        },
+      }, {
         type: 'list',
         name: 'state',
         message: 'What state do you want for this job?',
@@ -169,6 +177,7 @@ export default class JobsCreate extends BaseCommand {
         },
         Retries: answers.retries,
         State: answers.state,
+        Jitter: answers.jitter
       }
 
       // Validate jobCreatePayload

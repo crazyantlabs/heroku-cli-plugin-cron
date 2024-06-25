@@ -127,6 +127,7 @@ export interface ManifestJob {
   command: string;
   timeout: number;
   retries: number;
+  jitter: number;
   state: string;
   [k: string]: any;
 }
