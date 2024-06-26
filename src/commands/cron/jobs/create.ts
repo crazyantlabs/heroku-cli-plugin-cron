@@ -177,7 +177,7 @@ export default class JobsCreate extends BaseCommand {
         },
         Retries: answers.retries,
         State: answers.state,
-        Jitter: answers.jitter
+        Jitter: answers.jitter,
       }
 
       // Validate jobCreatePayload

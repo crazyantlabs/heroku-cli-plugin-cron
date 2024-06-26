@@ -69,6 +69,7 @@ describe('cron:jobs:create', () => {
         timeout: stub.Target?.TimeToLive,
         retries: stub.Retries,
         state: stub.State,
+        jitter: stub.Jitter,
       })
     })
   }
