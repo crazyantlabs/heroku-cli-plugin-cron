@@ -15,8 +15,8 @@ export default class JobsUpdate extends BaseCommand {
   static description = 'update a job on Cron To Go\nRead more about this feature at https://devcenter.heroku.com/articles/crontogo'
 
   static examples = [
-    '$ heroku cron:jobs:create -a your-app',
-    '$ heroku cron:jobs:create --app your-app',
+    '$ heroku cron:jobs:update -a your-app',
+    '$ heroku cron:jobs:update --app your-app',
   ]
 
   static flags = {
@@ -52,6 +52,7 @@ export default class JobsUpdate extends BaseCommand {
       if (_.has(flags, 'timeout')) _.set(jobUpdatePayload, 'Target.TimeToLive', flags.timeout)
       if (_.has(flags, 'state')) _.set(jobUpdatePayload, 'State', flags.state)
       if (_.has(flags, 'retries')) _.set(jobUpdatePayload, 'Retries', flags.retries)
+      if (_.has(flags, 'jitter')) _.set(jobUpdatePayload, 'Jitter', flags.jitter)
 
       // Validate jobUpdatePayload
       const validation = ValidationService.getJobValidationService().validate(jobUpdatePayload)

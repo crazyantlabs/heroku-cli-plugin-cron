@@ -62,6 +62,7 @@ export default class JobsInfo extends BaseCommand {
         Schedule: res.ScheduleExpression,
         Timezone: res.Timezone,
         Retries: res.Retries,
+        Jitter: res.Jitter,
         Created: formatDate(res.CreatedAt),
         Updated: formatDate(res.UpdatedAt),
       })

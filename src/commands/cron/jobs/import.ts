@@ -189,6 +189,7 @@ export default class JobsImport extends BaseCommand {
       if (_.has(job, 'command')) _.set(jobCreatePayload, 'Target.Command', job.command)
       if (_.has(job, 'timeout')) _.set(jobCreatePayload, 'Target.TimeToLive', job.timeout)
       if (_.has(job, 'retries')) _.set(jobCreatePayload, 'Retries', job.retries)
+      if (_.has(job, 'jitter')) _.set(jobCreatePayload, 'Jitter', job.jitter)
       if (_.has(job, 'state')) _.set(jobCreatePayload, 'State', job.state)
 
       // Validate jobCreatePayload

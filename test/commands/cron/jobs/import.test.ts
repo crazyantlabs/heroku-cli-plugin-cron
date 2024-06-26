@@ -32,6 +32,7 @@ const jobStub = {
     Size: 'Basic',
     TimeToLive: 30,
   },
+  Jitter: 5,
   LastAttempt: {
     Id: 'attempt-123456',
     State: 'running',

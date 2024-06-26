@@ -5,6 +5,7 @@ jobs:
     dyno: Basic
     command: my command 1
     timeout: 30
+    jitter: 5
     state: enabled
   - nickname: my-job-2
     schedule: '* * * * *'

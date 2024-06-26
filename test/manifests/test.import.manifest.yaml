@@ -6,6 +6,7 @@ jobs:
     dyno: 'Basic'
     timeout: 30
     state: 'enabled'
+    jitter: 5
 
   - nickname: created-job-with-very-long-name
     timezone: 'UTC'

@@ -57,6 +57,7 @@ export default class JobsExport extends BaseCommand {
             command: _.get(job, 'Target.Command'),
             timeout: _.get(job, 'Target.TimeToLive'),
             retries: _.get(job, 'Retries'),
+            jitter: _.get(job, 'Jitter'),
             state: _.get(job, 'State'),
           }
         }),

@@ -27,6 +27,7 @@ const jobStub = {
     State: 'running',
     CreatedAt: '2020-01-01T12:00:00Z',
   },
+  Jitter: 5,
   CreatedAt: '2020-01-01T12:00:00Z',
   UpdatedAt: '2020-01-01T12:00:00Z',
 }

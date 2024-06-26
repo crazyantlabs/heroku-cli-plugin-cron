@@ -29,6 +29,7 @@ const jobStub = {
     CreatedAt: '2020-01-01T12:00:00Z',
   },
   Retries: 3,
+  Jitter: 0,
   CreatedAt: '2020-01-01T12:00:00Z',
   UpdatedAt: '2020-01-01T12:00:00Z',
 }
@@ -40,6 +41,7 @@ const createCommandJobStub = _.merge({}, jobStub, {Target: {Command: 'created-co
 const createDynoJobStub = _.merge({}, jobStub, {Target: {Size: 'Standard-1X'}})
 const createTimeoutJobStub = _.merge({}, jobStub, {Target: {TimeToLive: 700}})
 const createRetriesJobStub = _.merge({}, jobStub, {Retries: 5})
+const createJitterJobStub = _.merge({}, jobStub, {Jitter: 5})
 const createStateJobStub = _.merge({}, jobStub, {State: 'paused'})
 const multiUpdateJobStub = _.merge({}, jobStub, {Alias: 'multi-creates', State: 'paused'})
 const createRateJobStub = _.merge({}, jobStub, {ScheduleExpression: '3 hours'})
@@ -153,6 +155,14 @@ describe('cron:jobs:create', () => {
     expect(ctx.stdout).to.contain('"Retries": 5')
   })
 
+  testFactory(createJitterJobStub)
+  .stdout()
+  .command(['cron:jobs:create', '--app', app, '--jitter', '5', '--json'])
+  .it('shows detailed information about newly created Cron To Go job with jitter in JSON format', ctx => {
+    expect(ctx.stdout).to.contain('"Alias": "my-job"')
+    expect(ctx.stdout).to.contain('"Jitter": 5')
+  })
+
   testFactory(multiUpdateJobStub)
   .stdout()
   .command(['cron:jobs:create', '--app', app, '--nickname', multiUpdateJobStub.Alias, '--state', multiUpdateJobStub.State, '--json'])
@@ -183,6 +193,7 @@ describe('cron:jobs:create', () => {
       command: jobStub.Target?.Command,
       timeout: jobStub.Target?.TimeToLive,
       retries: jobStub.Retries,
+      jitter: jobStub.Jitter,
       state: jobStub.State,
     })
   })
@@ -211,6 +222,7 @@ describe('cron:jobs:create', () => {
       command: jobStub.Target?.Command,
       timeout: jobStub.Target?.TimeToLive,
       retries: jobStub.Retries,
+      jitter: jobStub.Jitter,
       state: jobStub.State,
     })
   })
