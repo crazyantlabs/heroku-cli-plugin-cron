@@ -22,7 +22,6 @@ export async function confirmResource(resource: string, confirm: string): Promis
 
   if (confirm !== resource) {
     CliUx.ux.error(`Confirmation ${color.bold.red(confirm)} did not match ${color.bold.red(resource)}. Aborted.`)
-    return false
   }
 
   return true

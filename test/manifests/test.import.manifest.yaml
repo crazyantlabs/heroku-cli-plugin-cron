@@ -8,7 +8,18 @@ jobs:
     state: 'enabled'
     jitter: 5
 
-  - nickname: created-job-with-very-long-name
+  - nickname: created-rate-job-with-very-long-name
+    timezone: 'UTC'
+    schedule: '2 minutes'
+    command: 'my command 2'
+    dyno: 'Basic'
+    timeout: 30
+    state: 'enabled'
+    start_date: '2021-01-01T00:00:00Z'
+    retries: 5
+
+  - id: 'job2-123456'
+    nickname: created-job-with-very-long-name
     timezone: 'UTC'
     schedule: '* * * * *'
     command: 'my command 2'

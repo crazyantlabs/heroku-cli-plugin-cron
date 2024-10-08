@@ -143,7 +143,7 @@ export default class JobsCreate extends BaseCommand {
       }, {
         type: 'number',
         name: 'jitter',
-        message: 'What is the jitter (in minutes)?',
+        message: 'What is the job jitter (in minutes)?',
         default: 0,
         validate(input) {
           return validateAnswer('Jitter', input)
@@ -167,8 +167,8 @@ export default class JobsCreate extends BaseCommand {
       const jobCreatePayload: Record<string, unknown> = {
         Alias: answers.nickname,
         ScheduleExpression: answers.schedule,
-        Timezone: answers.timezone,
         ScheduleType: scheduleType,
+        Timezone: answers.timezone,
         Target: {
           Type: TargetType.DYNO, // Currently, only dyno target type supported
           Size: answers.dyno,

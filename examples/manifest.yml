@@ -27,6 +27,7 @@ jobs:
   - nickname: Every minute Rate expression job
     timezone: 'UTC'
     schedule: '1 minute'
+    start_date: '2021-01-01T00:00:00'
     command: 'echo "Every Minute Job"'
     dyno: 'Basic'
     timeout: 300
@@ -35,6 +36,7 @@ jobs:
   - nickname: Every 3 hours Rate expression job
     timezone: 'UTC'
     schedule: '3 hours'
+    start_date: '2021-01-01T00:00:00'
     command: 'echo "Every 3 Hours Job"'
     dyno: 'Basic'
     timeout: 300
@@ -43,6 +45,17 @@ jobs:
   - nickname: Every 2 days Rate expression job
     timezone: 'America/New_York'
     schedule: '2 days'
+    start_date: '2021-01-01T00:00:00'
+    command: 'echo "Every 2 Days Job"'
+    dyno: 'Basic'
+    timeout: 300
+    state: 'enabled'
+
+  - id: '12345678-1234-5678-1234-567812345678'
+    nickname: Every 2 days Rate expression job with ID
+    timezone: 'America/New_York'
+    schedule: '2 days'
+    start_date: '2021-01-01T00:00:00'
     command: 'echo "Every 2 Days Job"'
     dyno: 'Basic'
     timeout: 300
