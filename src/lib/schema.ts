@@ -62,6 +62,7 @@ export interface Job {
   State: JobState;
   ScheduleExpression: string;
   ScheduleType: ScheduleType;
+  StartDate: string;
   Timezone: string;
   Target: JobTarget;
   LastAttempt: {
@@ -120,8 +121,10 @@ export interface Manifest {
 }
 
 export interface ManifestJob {
+  id?: string;
   nickname: string;
   schedule: string;
+  start_date: string; // ISO 8601 string date
   dyno: string;
   timezone: string;
   command: string;

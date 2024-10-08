@@ -78,6 +78,10 @@ describe('cron:jobs:import', () => {
     .post(`/organizations/${organizationId}/jobs`)
     .reply(200, job2Stub),
     )
+    .nock('https://api.crontogo.com', api => api
+    .patch(`/organizations/${organizationId}/jobs/${job2Id}`)
+    .reply(200, job2Stub),
+    )
   }
 
   const testInvalidFactory = () => {
@@ -118,6 +122,10 @@ describe('cron:jobs:import', () => {
     .post(`/organizations/${organizationId}/jobs`)
     .reply(200, job2Stub),
     )
+    .nock('https://api.crontogo.com', api => api
+    .post(`/organizations/${organizationId}/jobs`)
+    .reply(200),
+    )
   }
 
   const testWithFailingDeleteFactory = () => {
@@ -146,7 +154,7 @@ describe('cron:jobs:import', () => {
   .command(['cron:jobs:import', filename, '--app', app])
   .it('imports given manifest successfully and creates requested jobs', ctx => {
     expect(ctx.stderr).to.contain(`Reading ${filename} manifest file to import to ${organizationId} Cron To Go organization... done`)
-    expect(ctx.stderr).to.contain(`Importing jobs to ${organizationId} Cron To Go organization... done. 2/2 jobs imported`)
+    expect(ctx.stderr).to.contain(`Importing jobs to ${organizationId} Cron To Go organization... done. 3/3 jobs imported`)
   })
 
   testInvalidFactory()
@@ -191,8 +199,9 @@ describe('cron:jobs:import', () => {
   .command(['cron:jobs:import', filename, '--app', app, '--delete', '--confirm', app])
   .it('imports given manifest successfully, deletes all jobs and creates requested jobs', ctx => {
     expect(ctx.stderr).to.contain(`Reading ${filename} manifest file to import to ${organizationId} Cron To Go organization... done`)
+    expect(ctx.stderr).to.contain(' ›   Warning: Some jobs in the manifest file have IDs.')
     expect(ctx.stderr).to.contain(`Deleting all jobs from ${organizationId} Cron To Go organization... done. 2/2 jobs deleted`)
-    expect(ctx.stderr).to.contain(`Importing jobs to ${organizationId} Cron To Go organization... done. 2/2 jobs imported`)
+    expect(ctx.stderr).to.contain(`Importing jobs to ${organizationId} Cron To Go organization... done. 3/3 jobs imported`)
   })
 
   test

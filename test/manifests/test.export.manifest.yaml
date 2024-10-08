@@ -1,6 +1,7 @@
 jobs:
   - nickname: my-job-1
     schedule: '* * * * *'
+    start_date: null
     timezone: UTC
     dyno: Basic
     command: my command 1
@@ -9,12 +10,14 @@ jobs:
     state: enabled
   - nickname: my-job-2
     schedule: '* * * * *'
+    start_date: null
     timezone: UTC
     dyno: Basic
     timeout: 30
     state: paused
   - nickname: my-job-3
     schedule: '* * * * *'
+    start_date: null
     timezone: UTC
     command: my command 3
     timeout: 30

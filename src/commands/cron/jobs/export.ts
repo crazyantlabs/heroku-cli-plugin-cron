@@ -8,6 +8,7 @@ import {Job, Manifest} from '../../../lib/schema'
 
 import {fetchAuthInfo} from '../../../lib/fetcher'
 import BaseCommand from '../../../lib/base'
+import formatStartDate from '../../../lib/format-start-date'
 
 import * as _ from 'lodash'
 
@@ -17,11 +18,16 @@ export default class JobsExport extends BaseCommand {
   static examples = [
     '$ heroku cron:jobs:export manifest.yml -a your-app',
     '$ heroku cron:jobs:export /tmp/manifest.yml --app your-app',
+    '$ heroku cron:jobs:export /tmp/manifest.yml --with-id --app your-app',
   ]
 
   static flags = {
     app: flags.app({required: true}),
     remote: flags.remote(),
+    'with-id': flags.boolean({
+      description: 'include job ID in the exported manifest file',
+      default: false,
+    }),
   }
 
   static args = [
@@ -50,8 +56,10 @@ export default class JobsExport extends BaseCommand {
       const manifest:Manifest = {
         jobs: _.map(jobs, function (job: Job) {
           return {
+            ...(flags['with-id'] ? {id: _.get(job, 'Id')} : {}),
             nickname: _.get(job, 'Alias'),
             schedule: _.get(job, 'ScheduleExpression'),
+            start_date: formatStartDate(_.get(job, 'StartDate')),
             timezone: _.get(job, 'Timezone'),
             dyno: _.get(job, 'Target.Size'),
             command: _.get(job, 'Target.Command'),

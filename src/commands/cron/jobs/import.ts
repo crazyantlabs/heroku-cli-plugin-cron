@@ -9,9 +9,10 @@ import {Job, JobState, DynoSize, ScheduleType, TargetType, Manifest, ManifestJob
 
 import {fetchAuthInfo} from '../../../lib/fetcher'
 import BaseCommand, {confirmResource} from '../../../lib/base'
-import ValidationService from '../../../lib/validation-service'
+import ValidationService, {isRateExpression} from '../../../lib/validation-service'
 
 import * as _ from 'lodash'
+import formatStartDate from '../../../lib/format-start-date'
 
 export default class JobsImport extends BaseCommand {
   static description = 'import jobs into Cron To Go using a [manifest file](https://github.com/crazyantlabs/heroku-cli-plugin-cron/blob/main/examples/manifest.yml)\n\nRead more about this feature at https://devcenter.heroku.com/articles/crontogo'
@@ -67,15 +68,28 @@ export default class JobsImport extends BaseCommand {
 
       CliUx.ux.action.stop()
 
+      // Start importing manifest jobs
+      const jobs = manifest.jobs || []
       if (flags.delete) {
+        // Check if any of the jobs has an ID. If so, warn the user that the jobs will be deleted and will be recreated with new IDs
+        const hasId = _.some(jobs, 'id')
+
+        if (hasId) {
+          CliUx.ux.warn('Some jobs in the manifest file have IDs. Since you requested to delete all jobs, these jobs will be recreated with new IDs.')
+
+          // Remove IDs from jobs
+          _.each(jobs, function (job) {
+            delete job.id
+          })
+        }
+
         await this.deleteAllJobs(authInfo.organizationId)
       }
 
-      // Start importing manifest jobs
-      const jobs = manifest.jobs || []
       await this.importJobs(authInfo.organizationId, jobs)
-    } catch (error: any) {
+    } catch (error) {
       CliUx.ux.action.stop(color.red('failed!'))
+      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }
@@ -90,11 +104,11 @@ export default class JobsImport extends BaseCommand {
     if (jobs && jobs.length > 0) {
       let successful = 0
       try {
-        // Create jobs in chunks of 10 to prevent rate limitations
-        const createJob = this.createJob.bind(this)
+        // Create or update jobs in chunks of 10 to prevent rate limitations
+        const createOrUpdateJob = this.createOrUpdateJob.bind(this)
         for (const chunk of _.chunk(jobs, 10)) {
           const promises = _.map(chunk, async function (job) {
-            await createJob(organizationId, job)
+            await createOrUpdateJob(organizationId, job)
             successful++
             CliUx.ux.action.status = `${successful}/${jobs.length} jobs imported`
           })
@@ -103,8 +117,9 @@ export default class JobsImport extends BaseCommand {
         }
 
         CliUx.ux.action.stop(`done. ${successful}/${jobs.length} jobs imported`)
-      } catch (error: any) {
+      } catch (error) {
         CliUx.ux.action.stop(color.red(`failed! ${successful}/${jobs.length} jobs imported`))
+        CliUx.ux.warn(error.toString())
         CliUx.ux.error(error)
       }
     } else {
@@ -138,15 +153,17 @@ export default class JobsImport extends BaseCommand {
           }
 
           CliUx.ux.action.stop(`done. ${successful}/${jobs.length} jobs deleted.`)
-        } catch (error: any) {
+        } catch (error) {
           CliUx.ux.action.stop(color.red(`failed! ${successful}/${jobs.length} jobs deleted`))
+          CliUx.ux.warn(error.toString())
           CliUx.ux.error(error)
         }
       } else {
         CliUx.ux.action.stop('no jobs to delete')
       }
-    } catch (error: any) {
+    } catch (error) {
       CliUx.ux.action.stop(color.red('failed!'))
+      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }
@@ -160,19 +177,20 @@ export default class JobsImport extends BaseCommand {
           raw: true,
         },
       )
-    } catch (error: any) {
+    } catch (error) {
+      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }
 
-  async createJob(organizationId: string, job: ManifestJob): Promise<void> {
+  async createOrUpdateJob(organizationId: string, job: ManifestJob): Promise<void> {
     try {
       // Default job creation payload
-      const jobCreatePayload: Record<string, unknown> = {
+      const jobPayload: Record<string, unknown> = {
         Alias: '',
         ScheduleExpression: '',
         Timezone: 'UTC',
-        ScheduleType: ScheduleType.CRON, // Currently, only cron schedule type is supported
+        ScheduleType: ScheduleType.CRON, // Cron by default
         Target: {
           Type: TargetType.DYNO, // Currently, only dyno target type supported
           Size: DynoSize.BASIC,
@@ -182,24 +200,38 @@ export default class JobsImport extends BaseCommand {
         State: JobState.ENABLED,
       }
 
-      if (_.has(job, 'nickname')) _.set(jobCreatePayload, 'Alias', job.nickname)
-      if (_.has(job, 'schedule')) _.set(jobCreatePayload, 'ScheduleExpression', job.schedule)
-      if (_.has(job, 'timezone')) _.set(jobCreatePayload, 'Timezone', job.timezone)
-      if (_.has(job, 'dyno')) _.set(jobCreatePayload, 'Target.Size', job.dyno)
-      if (_.has(job, 'command')) _.set(jobCreatePayload, 'Target.Command', job.command)
-      if (_.has(job, 'timeout')) _.set(jobCreatePayload, 'Target.TimeToLive', job.timeout)
-      if (_.has(job, 'retries')) _.set(jobCreatePayload, 'Retries', job.retries)
-      if (_.has(job, 'jitter')) _.set(jobCreatePayload, 'Jitter', job.jitter)
-      if (_.has(job, 'state')) _.set(jobCreatePayload, 'State', job.state)
+      if (_.has(job, 'nickname')) _.set(jobPayload, 'Alias', job.nickname)
+      if (_.has(job, 'schedule')) {
+        // Set schedule type
+        const scheduleType: ScheduleType = isRateExpression(job.schedule) ? ScheduleType.RATE : ScheduleType.CRON
+        _.set(jobPayload, 'ScheduleExpression', job.schedule)
+        _.set(jobPayload, 'ScheduleType', scheduleType)
+      }
 
-      // Validate jobCreatePayload
-      const validation = ValidationService.getJobValidationService().validate(jobCreatePayload)
+      if (_.has(job, 'start_date')) _.set(jobPayload, 'StartDate', formatStartDate(job.startDate))
+      if (_.has(job, 'timezone')) _.set(jobPayload, 'Timezone', job.timezone)
+      if (_.has(job, 'dyno')) _.set(jobPayload, 'Target.Size', job.dyno)
+      if (_.has(job, 'command')) _.set(jobPayload, 'Target.Command', job.command)
+      if (_.has(job, 'timeout')) _.set(jobPayload, 'Target.TimeToLive', job.timeout)
+      if (_.has(job, 'retries')) _.set(jobPayload, 'Retries', job.retries)
+      if (_.has(job, 'jitter')) _.set(jobPayload, 'Jitter', job.jitter)
+      if (_.has(job, 'state')) _.set(jobPayload, 'State', job.state)
+
+      // Validate jobPayload
+      const validation = ValidationService.getJobValidationService().validate(jobPayload)
 
       if (validation.isValid) {
-        await this.api.post<Job>(
+        // Create or update job
+        job.id ? await this.api.patch<Job>(
+          `/organizations/${organizationId}/jobs/${job.id}`,
+          {
+            body: jobPayload,
+            ...this.api.defaults,
+          },
+        ) : await this.api.post<Job>(
           `/organizations/${organizationId}/jobs`,
           {
-            body: jobCreatePayload,
+            body: jobPayload,
             ...this.api.defaults,
           },
         )
@@ -208,7 +240,8 @@ export default class JobsImport extends BaseCommand {
         // Get first validation error:
         CliUx.ux.error(`${message}`)
       }
-    } catch (error: any) {
+    } catch (error) {
+      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }

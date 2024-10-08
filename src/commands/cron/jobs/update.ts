@@ -1,11 +1,11 @@
 import {CliUx} from '@oclif/core'
 import color from '@heroku-cli/color'
 
-import {Job} from '../../../lib/schema'
+import {Job, ScheduleType} from '../../../lib/schema'
 
 import {fetchAuthInfo} from '../../../lib/fetcher'
 import BaseCommand from '../../../lib/base'
-import ValidationService from '../../../lib/validation-service'
+import ValidationService, {isRateExpression} from '../../../lib/validation-service'
 
 import * as _ from 'lodash'
 
@@ -45,7 +45,14 @@ export default class JobsUpdate extends BaseCommand {
       const jobUpdatePayload: Record<string, unknown> = {}
 
       if (_.has(flags, 'nickname')) _.set(jobUpdatePayload, 'Alias', flags.nickname)
-      if (_.has(flags, 'schedule')) _.set(jobUpdatePayload, 'ScheduleExpression', flags.schedule)
+      if (_.has(flags, 'schedule')) {
+        // Set schedule type
+        const scheduleType: ScheduleType = isRateExpression(flags.schedule) ? ScheduleType.RATE : ScheduleType.CRON
+
+        _.set(jobUpdatePayload, 'ScheduleExpression', flags.schedule)
+        _.set(jobUpdatePayload, 'ScheduleType', scheduleType)
+      }
+
       if (_.has(flags, 'timezone')) _.set(jobUpdatePayload, 'Timezone', flags.timezone)
       if (_.has(flags, 'dyno')) _.set(jobUpdatePayload, 'Target.Size', flags.dyno)
       if (_.has(flags, 'command')) _.set(jobUpdatePayload, 'Target.Command', flags.command)
