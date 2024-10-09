@@ -77,7 +77,7 @@ export default class JobsExport extends BaseCommand {
       await writeFile(filename, dump(manifest))
 
       CliUx.ux.action.stop()
-    } catch (error: any) {
+    } catch (error) {
       CliUx.ux.error(error)
     }
   }
