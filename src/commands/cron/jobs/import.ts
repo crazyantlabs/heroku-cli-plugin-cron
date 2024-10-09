@@ -89,7 +89,6 @@ export default class JobsImport extends BaseCommand {
       await this.importJobs(authInfo.organizationId, jobs)
     } catch (error) {
       CliUx.ux.action.stop(color.red('failed!'))
-      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }
@@ -119,7 +118,6 @@ export default class JobsImport extends BaseCommand {
         CliUx.ux.action.stop(`done. ${successful}/${jobs.length} jobs imported`)
       } catch (error) {
         CliUx.ux.action.stop(color.red(`failed! ${successful}/${jobs.length} jobs imported`))
-        CliUx.ux.warn(error.toString())
         CliUx.ux.error(error)
       }
     } else {
@@ -155,7 +153,6 @@ export default class JobsImport extends BaseCommand {
           CliUx.ux.action.stop(`done. ${successful}/${jobs.length} jobs deleted.`)
         } catch (error) {
           CliUx.ux.action.stop(color.red(`failed! ${successful}/${jobs.length} jobs deleted`))
-          CliUx.ux.warn(error.toString())
           CliUx.ux.error(error)
         }
       } else {
@@ -163,7 +160,6 @@ export default class JobsImport extends BaseCommand {
       }
     } catch (error) {
       CliUx.ux.action.stop(color.red('failed!'))
-      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }
@@ -178,7 +174,6 @@ export default class JobsImport extends BaseCommand {
         },
       )
     } catch (error) {
-      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }
@@ -208,7 +203,7 @@ export default class JobsImport extends BaseCommand {
         _.set(jobPayload, 'ScheduleType', scheduleType)
       }
 
-      if (_.has(job, 'start_date')) _.set(jobPayload, 'StartDate', formatStartDate(job.startDate))
+      if (_.has(job, 'start_date')) _.set(jobPayload, 'StartDate', formatStartDate(job.start_date))
       if (_.has(job, 'timezone')) _.set(jobPayload, 'Timezone', job.timezone)
       if (_.has(job, 'dyno')) _.set(jobPayload, 'Target.Size', job.dyno)
       if (_.has(job, 'command')) _.set(jobPayload, 'Target.Command', job.command)
@@ -241,7 +236,6 @@ export default class JobsImport extends BaseCommand {
         CliUx.ux.error(`${message}`)
       }
     } catch (error) {
-      CliUx.ux.warn(error.toString())
       CliUx.ux.error(error)
     }
   }
